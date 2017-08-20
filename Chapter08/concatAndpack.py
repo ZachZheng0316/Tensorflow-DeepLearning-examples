@@ -8,46 +8,20 @@ Created on Fri Jul 14 07:58:30 2017
 
 import tensorflow as tf
 
-t1 = tf.constant([[1, 2, 3], [4, 5, 6]])
-t2 = tf.constant([[7, 8, 9], [10, 11, 12]])
+x = [[1, 2], [3, 4]]  # shape = [2, 2]
+y = [[5, 6], [7, 8]]  # shape = [2, 2]
+z = [[9, 10], [11, 12]]  # shape = [2, 2]
 
-c1 = tf.concat(values=[t1, t2], axis=0, name="concat") # cat on rank-0
-c2 = tf.concat(values=[t1, t2], axis=1, name="concat") # cat om rank-1
-
-r1 = tf.reshape(tensor=c1, shape=[- 1], name=None)
-r2 = tf.reshape(tensor=c2, shape=[- 1], name=None)
-
-p1 = tf.stack(values=[t1, t2], axis=0, name="stack")
-p2 = tf.stack(values=[t1, t2], axis=1, name="stack")
-p3 = [t1, t2]
+t1 = tf.stack(values = [x, y, z], axis = 0) # ==>[[1, 4], 沿着axis=0的方向打包tensors, shape=[3, 2, 2]
+                                            #     [2, 5], 
+                                            #     [3, 6]]
+t2 = tf.stack(values = [x, y, z], axis = 1) # ==>[[1, 2, 3], 沿着axis=1的方向打包tensors, shape=[2, 3, 2]
+                                            #     [4, 5, 6]]
+un1 = tf.unstack(value = t1, num = 3, axis = 0)
+un2 = tf.unstack(value = t2, num = 3, axis = 1)
 
 with tf.Session() as sess:
-    print 't1: '
-    print sess.run(fetches=t1, feed_dict=None, options=None, run_metadata=None)
-    
-    print 't2: '
-    print sess.run(fetches=t2, feed_dict=None, options=None, run_metadata=None)
-    
-    print 'c1: '
-    print sess.run(fetches=c1, feed_dict=None, options=None, run_metadata=None)
-    
-    print 'c2: '
-    print sess.run(fetches=c2, feed_dict=None, options=None, run_metadata=None)
-    
-    print '[c1, c2]: '
-    print sess.run(fetches=[c1, c2],feed_dict=None, options=None, run_metadata=None)
-    
-    print 'rank(t1), rank(c1), rank(r1), rank(p1)'
-    print sess.run(fetches=[tf.rank(input=t1, name=None), 
-                            tf.rank(input=c1, name=None), 
-                            tf.rank(input=r1, name=None), 
-                            tf.rank(input=p1, name=None)], 
-                    feed_dict=None, options=None, run_metadata=None)
-    
-    print 'r1: '
-    print sess.run(fetches=r1, feed_dict=None, options=None, run_metadata=None)
-    
-    print 'r2: '
-    print sess.run(fetches=r2, feed_dict=None, options=None, run_metadata=None)
-    
-    print 'shape(p1), shape(p2): '
+    print sess.run(t1)
+    print sess.run(t2)
+    print sess.run(un1)
+    print sess.run(un2)
