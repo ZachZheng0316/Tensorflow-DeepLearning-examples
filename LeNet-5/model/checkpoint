@@ -1,0 +1,6 @@
+model_checkpoint_path: "LeNet-5-29001"
+all_model_checkpoint_paths: "LeNet-5-25001"
+all_model_checkpoint_paths: "LeNet-5-26001"
+all_model_checkpoint_paths: "LeNet-5-27001"
+all_model_checkpoint_paths: "LeNet-5-28001"
+all_model_checkpoint_paths: "LeNet-5-29001"
