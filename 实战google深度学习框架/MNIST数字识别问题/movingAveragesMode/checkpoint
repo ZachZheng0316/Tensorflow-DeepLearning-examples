@@ -1,2 +1,0 @@
-model_checkpoint_path: "movingAveragesMode.ckpt"
-all_model_checkpoint_paths: "movingAveragesMode.ckpt"
