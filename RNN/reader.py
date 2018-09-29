@@ -15,9 +15,9 @@
 
 
 """Utilities for parsing PTB text files."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+from __future__ import absolute_import # 添加绝对引入
+from __future__ import division        # 导入精确除法
+from __future__ import print_function  # 使用py3的print格式
 
 import collections
 import os
@@ -25,8 +25,10 @@ import sys
 
 import tensorflow as tf
 
+# 判断Python版本
 Py3 = sys.version_info[0] == 3
 
+# 读取文本并返回文本的单词列表
 def _read_words(filename):
   with tf.gfile.GFile(filename, "r") as f:
     if Py3:
@@ -34,11 +36,11 @@ def _read_words(filename):
     else:
       return f.read().decode("utf-8").replace("\n", "<eos>").split()
 
-
+# 建立词典：{单词0：id0，单词1:id1, ...}
 def _build_vocab(filename):
-  data = _read_words(filename)
+  data = _read_words(filename) # 返回文本的单词列表
 
-  counter = collections.Counter(data)
+  counter = collections.Counter(data) # 统计每种单词出现的个数
   count_pairs = sorted(counter.items(), key=lambda x: (-x[1], x[0]))
 
   words, _ = list(zip(*count_pairs))
